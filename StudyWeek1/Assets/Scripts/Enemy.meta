@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:StudyWeek1/Assets/Skripts/Enemy.meta
 guid: 46e00a55b82884747880ccc84c4cc6ac
 folderAsset: yes
 timeCreated: 1451920637
+=======
+guid: c809ac113a4020641ae89cc683b770fb
+folderAsset: yes
+timeCreated: 1451919302
+>>>>>>> origin/master:StudyWeek1/Assets/Scripts.meta
 licenseType: Free
 DefaultImporter:
   userData: 
