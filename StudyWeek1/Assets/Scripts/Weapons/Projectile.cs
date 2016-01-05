@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour {
 
     void Update()
     {
+        if (rig.velocity == Vector3.zero) Destroy(gameObject);
         lifetime -= Time.deltaTime;
         if(lifetime <= 0)
         {
