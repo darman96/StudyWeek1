@@ -14,6 +14,7 @@ public class PlaneCharacter : MonoBehaviour {
 
     // Contains all projectiles for the Weapon Stages
     public List<GameObject> Projectiles = new List<GameObject>();
+    public List<GameObject> WeaponMounts = new List<GameObject>();
 
     private int WeaponMod;
     private int CurrentHP;
@@ -39,7 +40,7 @@ public class PlaneCharacter : MonoBehaviour {
 	void Update ()
     {
         // Keep Character on flight level
-	    if(transform.position.y < FlightLevel)
+	    if(transform.position.y < FlightLevel || transform.position.y > FlightLevel)
         {
             Vector3 curPos = transform.position;
             curPos.y = FlightLevel;
@@ -78,18 +79,18 @@ public class PlaneCharacter : MonoBehaviour {
         // Tilt the plane when flying left or right
         if(xVelocity == 0)
         {
-            transform.rotation = Quaternion.Euler(-90, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         if(xVelocity < 0)
         {
-            transform.rotation = Quaternion.Euler(-90, 0, -45);
+            transform.rotation = Quaternion.Euler(0, 0, 45);
         }
         if(xVelocity > 0)
         {
-            transform.rotation = Quaternion.Euler(-90, 0, 45);
+            transform.rotation = Quaternion.Euler(0, 0, -45);
         }
 
-        transform.Translate(transform.TransformDirection(new Vector3(xVelocity, 0, zVelocity)));
+        transform.Translate(new Vector3(xVelocity, 0, zVelocity));
     }
 
     private void Attack()
@@ -98,7 +99,7 @@ public class PlaneCharacter : MonoBehaviour {
         Instantiate(Projectiles[WeaponMod],transform.position , transform.rotation);
     }
 
-    private void CollectPowerUp(int powerUp)
+    public void CollectPowerUp(int powerUp)
     {
 
         switch(powerUp)
