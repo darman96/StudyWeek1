@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PowerUps : MonoBehaviour
 {
-    public int destroyPickupAfterXSeconds = 0;
+    public int destroyPickupAfterXSeconds = 2;
     public float rotationSpeed = 100f;
 
     public int buffType = 0;
@@ -17,11 +17,10 @@ public class PowerUps : MonoBehaviour
 	// Update is called once per frame
 	void OnTriggerEnter (Collider col)
     {
-	if (col.gameObject.tag == "Player")
+	    if (col.gameObject.tag == "Player")
         {
-//            col.GetComponent<PlaneCharacter>().CollectPowerUp(buffType);
+            col.GetComponent<PlaneCharacter>().CollectPowerUp(buffType);
+            Destroy(gameObject, destroyPickupAfterXSeconds);
         }
-
-        Destroy(gameObject, destroyPickupAfterXSeconds);
 	}
 }
