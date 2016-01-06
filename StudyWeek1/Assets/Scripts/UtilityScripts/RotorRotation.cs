@@ -7,6 +7,6 @@ public class RotorRotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(Vector3.right * m_rotorSpeed);
+        transform.Rotate(Vector3.up * m_rotorSpeed);
 	}
 }
