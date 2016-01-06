@@ -2,11 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Flight Controller for the plane character
+/// </summary>
 public class PlaneCharacter : MonoBehaviour {
 
     public float MoveSpeed = 10f;
     public float FlightLevel = 10f;
+    public float TiltWhileStraving = 30f;
 
+    // Duration for the Shield PowerUp
     public int ShieldDuration = 5;
 
     public int MaxHP = 5;
@@ -16,7 +21,7 @@ public class PlaneCharacter : MonoBehaviour {
     public List<GameObject> Projectiles = new List<GameObject>();
     public List<GameObject> WeaponMounts = new List<GameObject>();
 
-    private int WeaponMod;
+    private int WeaponMod;          // Current weapon state, will be increased by PowerUps
     private int CurrentHP;
     private float CurrentShieldDuration  = 0;
 
@@ -30,6 +35,7 @@ public class PlaneCharacter : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        // Set Current Health and get Rigidbody and Audio component from GameObject
         CurrentHP = MaxHP;
 
         rig = GetComponent<Rigidbody>();
@@ -83,11 +89,11 @@ public class PlaneCharacter : MonoBehaviour {
         }
         if(xVelocity < 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 45);
+            transform.rotation = Quaternion.Euler(0, 0, TiltWhileStraving);
         }
         if(xVelocity > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, -45);
+            transform.rotation = Quaternion.Euler(0, 0, -TiltWhileStraving);
         }
 
         transform.Translate(new Vector3(xVelocity, 0, zVelocity));
@@ -99,9 +105,11 @@ public class PlaneCharacter : MonoBehaviour {
         Instantiate(Projectiles[WeaponMod],transform.position , transform.rotation);
     }
 
+    // Called when PowerUp is Collected
     public void CollectPowerUp(int powerUp)
     {
 
+        // Apply PowerUp buff / (debuff?)
         switch(powerUp)
         {
             case 0:
