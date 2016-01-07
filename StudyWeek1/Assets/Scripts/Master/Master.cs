@@ -12,16 +12,21 @@ public class Master : MonoBehaviour {
     private Wave currentWave;
     private int currentWaveIndex = 0;
 
+    //Playercount
+    public int m_playerCount = 1;
+
 	// Use this for initialization
 	void Start () {
+        GameObject.DontDestroyOnLoad(this.gameObject);
+
         Player = GameObject.FindWithTag("Player");
 
-        currentWave = Waves[currentWaveIndex].GetComponent<Wave>();
+        //currentWave = Waves[currentWaveIndex].GetComponent<Wave>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
+	/*    
         if(currentWave.Finished() && currentWaveIndex != Waves.Count - 1)
         {
             currentWaveIndex++;
@@ -29,6 +34,6 @@ public class Master : MonoBehaviour {
         }
 
         currentWave.Spawn();
-
+    */
 	}
 }

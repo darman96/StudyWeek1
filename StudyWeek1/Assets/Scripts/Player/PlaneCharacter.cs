@@ -8,7 +8,6 @@ public class PlaneCharacter : MonoBehaviour {
     public float m_TimeToNextShot = 0.5f;
     private bool m_NextShot = true;
 
-    public float MoveSpeed = 10f;
     public float FlightLevel = 10f;
 
     public int ShieldDuration = 5;
@@ -26,10 +25,6 @@ public class PlaneCharacter : MonoBehaviour {
     private int CurrentHP;
     private float CurrentShieldDuration  = 0;
 
-    private float xVelocity = 0;
-    private float zVelocity = 0;
-
-    private Rigidbody rig;
     private AudioSource audio;
     private GameObject obj_hpBar;
     private UnityEngine.UI.Text txtPoints;
@@ -39,11 +34,10 @@ public class PlaneCharacter : MonoBehaviour {
     {
         CurrentHP = MaxHP;
 
-        rig = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
 
         obj_hpBar = GameObject.Find("HPF");
-        txtPoints = GameObject.Find("DPoints").GetComponent<UnityEngine.UI.Text>();
+        //txtPoints = GameObject.Find("DPoints").GetComponent<UnityEngine.UI.Text>();
 
 	}
 	
@@ -62,22 +56,8 @@ public class PlaneCharacter : MonoBehaviour {
 
 	}
 
-    void FixedUpdate()
-    {
-        //Movement();                                  //////////////////////////////////////////////
-    }
-
-    void LateUpdate()
-    {
-
-    }
-
     private void InputHandling()
     {
-        // Get velocity
-        xVelocity = Input.GetAxis("Horizontal") * MoveSpeed * Time.deltaTime;
-        zVelocity = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
-
         // Shooting
         if(Input.GetKey(KeyCode.Space) && m_NextShot == true)
         {
@@ -92,25 +72,6 @@ public class PlaneCharacter : MonoBehaviour {
         yield return new WaitForSeconds(_TimeToWait);
         m_NextShot = true;
     }
-
-    /*private void Movement()
-    {
-        // Tilt the plane when flying left or right
-        if(xVelocity == 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        if(xVelocity < 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 45);
-        }
-        if(xVelocity > 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, -45);
-        }
-
-        transform.Translate(new Vector3(xVelocity, 0, zVelocity));
-    }*/
 
     private void Attack()
     {

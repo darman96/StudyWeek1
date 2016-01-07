@@ -35,4 +35,16 @@ public class ButtonCommands : MonoBehaviour {
         m_BindingsScreen.active = false;
         m_OptionsScreen.active = true;
     }
+
+    public void LoadP1() {
+        GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount = 1;
+        print(GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount);
+        Application.LoadLevel(1);
+    }
+
+    public void LoadP2() {
+        GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount = 2;
+        print(GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount);
+        Application.LoadLevel(1);
+    }
 }
