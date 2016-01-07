@@ -14,8 +14,6 @@ public class Movement : MonoBehaviour {
     private float zVelocityPly1 = 0;
     private float xVelocityPly2 = 0;
     private float zVelocityPly2 = 0;
-    //Last Buttons Variable
-    private string m_lastKey = "";
 
 	// Update is called once per frame
 	void Update () {
@@ -53,26 +51,24 @@ public class Movement : MonoBehaviour {
         if(xVeloc < 0 && (transform.rotation.z < 20 || transform.rotation.z >= 340)) {
             transform.Rotate(Vector3.forward, m_rotateSpeed * Time.deltaTime);
         }
-        if(transform.rotation.eulerAngles.z > 20 && transform.rotation.eulerAngles.z < 200) {
+        if(transform.rotation.eulerAngles.z > 20 && transform.rotation.eulerAngles.z < 180) {
             transform.rotation = Quaternion.Euler(0, 0, 20);
-            m_lastKey = "left";
         }
 
         //Right drill
         if(xVeloc > 0 && (transform.rotation.z > 340 || transform.rotation.z <= 20)) {
             transform.Rotate(Vector3.back, m_rotateSpeed * Time.deltaTime);
         }
-        if(transform.rotation.eulerAngles.z < 340 && transform.rotation.eulerAngles.z > 200) {
+        if(transform.rotation.eulerAngles.z < 340 && transform.rotation.eulerAngles.z > 180) {
             transform.rotation = Quaternion.Euler(0, 0, 340);
-            m_lastKey = "right";
         }
 
         //Redrill in the middle when no "Left/Right" Button is pressed
-        if(xVeloc == 0 && transform.rotation.eulerAngles.z != 0) {
-            if(transform.rotation.z > 0 && m_lastKey == "right") {
+        if(xVeloc == 0 && transform.rotation.z != 0) {
+            if(transform.rotation.eulerAngles.z > 0 && transform.rotation.eulerAngles.z < 180) {
                 transform.Rotate(Vector3.back, m_rotateSpeed * Time.deltaTime);
             }
-            if(transform.rotation.z < 360 && m_lastKey == "left") { 
+            if(transform.rotation.eulerAngles.z < 360 && transform.rotation.eulerAngles.z > 180) {
                 transform.Rotate(Vector3.forward, m_rotateSpeed * Time.deltaTime);
             }
         }
