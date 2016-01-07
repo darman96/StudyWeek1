@@ -17,7 +17,7 @@ public class Master : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        GameObject.DontDestroyOnLoad(this.gameObject.transform);
 
         Player = GameObject.FindWithTag("Player");
 
