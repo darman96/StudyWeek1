@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class PlaneCharacter : MonoBehaviour {
 
+    //Time between Shots & so
+    public float m_TimeToNextShot = 0.5f;
+    private bool m_NextShot = true;
+
     public float MoveSpeed = 10f;
     public float FlightLevel = 10f;
 
@@ -53,7 +57,7 @@ public class PlaneCharacter : MonoBehaviour {
 
     void FixedUpdate()
     {
-        Movement();
+        //Movement();                                  //////////////////////////////////////////////
     }
 
     void LateUpdate()
@@ -68,13 +72,21 @@ public class PlaneCharacter : MonoBehaviour {
         zVelocity = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
 
         // Shooting
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space) && m_NextShot == true)
         {
             Attack();
+            m_NextShot = false;
+            //Hold the bullets back
+            StartCoroutine(StopShotting(m_TimeToNextShot));
         }
     }
 
-    private void Movement()
+    IEnumerator StopShotting(float _TimeToWait) {
+        yield return new WaitForSeconds(_TimeToWait);
+        m_NextShot = true;
+    }
+
+    /*private void Movement()
     {
         // Tilt the plane when flying left or right
         if(xVelocity == 0)
@@ -91,7 +103,7 @@ public class PlaneCharacter : MonoBehaviour {
         }
 
         transform.Translate(new Vector3(xVelocity, 0, zVelocity));
-    }
+    }*/
 
     private void Attack()
     {
