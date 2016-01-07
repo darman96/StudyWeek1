@@ -16,6 +16,8 @@ public class PlaneCharacter : MonoBehaviour {
     public int MaxHP = 5;
     public int Lives = 3;
 
+    [HideInInspector] public int points = 0;
+
     // Contains all projectiles for the Weapon Stages
     public List<GameObject> Projectiles = new List<GameObject>();
     public List<GameObject> WeaponMounts = new List<GameObject>();
@@ -29,7 +31,8 @@ public class PlaneCharacter : MonoBehaviour {
 
     private Rigidbody rig;
     private AudioSource audio;
-
+    private GameObject obj_hpBar;
+    private UnityEngine.UI.Text txtPoints;
 
 	// Use this for initialization
 	void Start ()
@@ -38,6 +41,10 @@ public class PlaneCharacter : MonoBehaviour {
 
         rig = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
+
+        obj_hpBar = GameObject.Find("HPF");
+        txtPoints = GameObject.Find("DPoints").GetComponent<UnityEngine.UI.Text>();
+
 	}
 	
 	// Update is called once per frame
@@ -130,6 +137,30 @@ public class PlaneCharacter : MonoBehaviour {
                 break;
         }
 
+    }
+
+    public void calcHP (int dmg)
+    {
+        CurrentHP -= dmg;
+        float hp = (float)CurrentHP / (float)MaxHP;
+
+        if (CurrentHP <= 0)
+        {
+            Lives -= 1;
+        }
+
+        if(Lives <= 0)
+        {
+            Application.LoadLevel(Application.loadedLevelName);
+        }
+
+        obj_hpBar.transform.localScale = new Vector3(Mathf.Clamp(hp, 0f, 1f), transform.localScale.y, transform.localScale.z);
+    }
+
+    public void calcPTS (int value)
+    {
+        points += value;
+        txtPoints.text = points.ToString();
     }
 
 }

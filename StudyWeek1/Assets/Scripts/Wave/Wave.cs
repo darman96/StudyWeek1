@@ -28,7 +28,7 @@ public class Wave : MonoBehaviour {
 
     public bool Finished()
     {
-
+        return true;
 
     }
 

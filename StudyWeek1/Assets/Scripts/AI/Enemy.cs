@@ -4,6 +4,7 @@ using System.Collections;
 public class Enemy : MonoBehaviour
 {
     public int maxEnemyHealth = 2;
+    public int enemyPoints = 100;
          
     private int curEnemyHealth = 2;
 
@@ -25,6 +26,10 @@ public class Enemy : MonoBehaviour
     }
    void EnemyDeath()
     {
+        PlaneCharacter plch = GameObject.Find("PlaneCharacter").GetComponent<PlaneCharacter> ();
+
+        plch.calcPTS(enemyPoints);
         Destroy(gameObject);
+
     }
 }
