@@ -32,14 +32,14 @@ public class EnemyAIM : MonoBehaviour {
 	void Update () {
         switch(m_playerCount) {
             case 1:
-                ShotAtPlayer(m_player1);
+                ShootAtPlayer(m_player1);
                 break;
             case 2:
                 NearestPlayer();
                 if(m_ply1Dist < m_ply2Dist) {
-                    ShotAtPlayer(m_player1);
+                    ShootAtPlayer(m_player1);
                 } else {
-                    ShotAtPlayer(m_player2);
+                    ShootAtPlayer(m_player2);
                 }
                 break;
         }
@@ -53,7 +53,7 @@ public class EnemyAIM : MonoBehaviour {
         m_dist2 = m_player2.transform.position - transform.position;
         m_ply2Dist = Vector3.SqrMagnitude(m_dist2);
     }
-    void ShotAtPlayer(GameObject _Player) {
+    void ShootAtPlayer(GameObject _Player) {
         Instantiate(m_ammonition, m_ammoSpawn.transform.position, Quaternion.LookRotation((_Player.transform.position + new Vector3(Random.Range(-m_spread, m_spread), 0, 0)), Vector3.up));
     }
 }
