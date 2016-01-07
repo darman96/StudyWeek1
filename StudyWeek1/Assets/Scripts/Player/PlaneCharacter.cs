@@ -15,6 +15,9 @@ public class PlaneCharacter : MonoBehaviour {
     public int MaxHP = 5;
     public int Lives = 3;
 
+    //Player Number
+    public int m_PlayerNumber = 1;
+
     [HideInInspector] public int points = 0;
 
     // Contains all projectiles for the Weapon Stages
@@ -59,8 +62,13 @@ public class PlaneCharacter : MonoBehaviour {
     private void InputHandling()
     {
         // Shooting
-        if(Input.GetKey(KeyCode.Space) && m_NextShot == true)
-        {
+        if(Input.GetKey(KeyCode.Space) && m_NextShot == true && m_PlayerNumber == 1) {
+            Attack();
+            m_NextShot = false;
+            //Hold the bullets back
+            StartCoroutine(StopShotting(m_TimeToNextShot));
+        }
+        if(Input.GetKey(KeyCode.Keypad0) && m_NextShot == true && m_PlayerNumber == 2) {
             Attack();
             m_NextShot = false;
             //Hold the bullets back

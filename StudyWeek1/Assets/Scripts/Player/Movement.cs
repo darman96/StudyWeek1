@@ -6,24 +6,32 @@ public class Movement : MonoBehaviour {
     //Variables
     public float m_moveSpeed = 50f;
     public float m_rotateSpeed = 150f;
+    public int m_PlayerNumber = 1;
+    private int m_PlayerCount = 1;
 
-    //PlayerCounts
-    private int m_playerCount = 1;      //Outsorce to Master Script
     //Velocitys
     private float xVelocityPly1 = 0;
     private float zVelocityPly1 = 0;
     private float xVelocityPly2 = 0;
     private float zVelocityPly2 = 0;
 
+    void Start() {
+        m_PlayerCount = GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount;
+    }
+
 	// Update is called once per frame
 	void Update () {
-        switch(m_playerCount) {
+        switch(m_PlayerCount) {
             case 1:
                 MovementPlayer1();
                 break;
             case 2:
-                MovementPlayer1();
-                MovementPlayer2();
+                if(m_PlayerNumber == 1) {
+                    MovementPlayer1();
+                }
+                if(m_PlayerNumber == 2) {
+                    MovementPlayer2();
+                }
                 break;
         }
 	}
