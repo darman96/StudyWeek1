@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlaneCharacter : MonoBehaviour {
 
     //Time between Shots & so
-    public float m_TimeToNextShot = 0.5f;
+    public float m_TimeToNextShot = 0.1f;
     private bool m_NextShot = true;
 
     public float FlightLevel = 10f;

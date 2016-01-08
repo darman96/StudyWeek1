@@ -1,31 +1,15 @@
 fileFormatVersion: 2
-guid: dc3f257b97b196c49be5bd3252fba7c1
-timeCreated: 1452164724
+guid: 32be109710170564ba0ac2f3cda9d21f
+timeCreated: 1452250015
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Particle View 001
-    100004: Propeller_Links
-    100006: Propeller_Rechts
-    100008: Rumpf
     400000: //RootNode
-    400002: Particle View 001
-    400004: Propeller_Links
-    400006: Propeller_Rechts
-    400008: Rumpf
-    2300000: Propeller_Links
-    2300002: Propeller_Rechts
-    2300004: Rumpf
-    3300000: Propeller_Links
-    3300002: Propeller_Rechts
-    3300004: Rumpf
-    4300000: Rumpf
-    4300002: Propeller_Links
-    4300004: Propeller_Rechts
-    7400000: Take 001
-    9500000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Box002
   materials:
     importMaterials: 1
     materialName: 0
@@ -84,7 +68,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
