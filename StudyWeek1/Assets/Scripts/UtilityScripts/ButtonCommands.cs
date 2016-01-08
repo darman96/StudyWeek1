@@ -6,6 +6,7 @@ public class ButtonCommands : MonoBehaviour {
     public GameObject m_MainScreen;
     public GameObject m_OptionsScreen;
     public GameObject m_BindingsScreen;
+    public GameObject m_ExtrasScreen;
 
     void Update() {
         //Escape-Button is used
@@ -13,10 +14,13 @@ public class ButtonCommands : MonoBehaviour {
             Exit();
         }
         if(Input.GetKeyDown(KeyCode.Escape) && (m_OptionsScreen.activeInHierarchy)) {
-            ToMainScreen();
+            ToMainScreenFromOptions();
         }
         if(Input.GetKeyDown(KeyCode.Escape) && (m_BindingsScreen.activeInHierarchy)) {
             ToOptionsScreen();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape) && (m_ExtrasScreen.activeInHierarchy)) {
+            ToMainScreenFromExtras();
         }
     }
 
@@ -26,8 +30,13 @@ public class ButtonCommands : MonoBehaviour {
         Application.Quit();
     }
 
-    public void ToMainScreen() {
+    public void ToMainScreenFromOptions() {
         m_OptionsScreen.active = false;
+        m_MainScreen.active = true;
+    }
+
+    public void ToMainScreenFromExtras() {
+        m_ExtrasScreen.active = false;
         m_MainScreen.active = true;
     }
 
