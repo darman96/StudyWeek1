@@ -31,6 +31,9 @@ public class PlaneCharacter : MonoBehaviour {
     private AudioSource audio;
     private GameObject obj_hpBar;
     private UnityEngine.UI.Text txtPoints;
+    //To modiy the initialized shots
+    private GameObject m_PlyShot;
+    public GameObject m_weapon;
 
 	// Use this for initialization
 	void Start ()
@@ -81,10 +84,10 @@ public class PlaneCharacter : MonoBehaviour {
         m_NextShot = true;
     }
 
-    private void Attack()
-    {
-        // Instantiate projectile of the current weapon stage
-        Instantiate(Projectiles[WeaponMod],transform.position , Quaternion.identity);
+    private void Attack(){
+        // Initialized projectile of the current weapon stage and retag the initialized shot
+        m_PlyShot = (GameObject)Instantiate(Projectiles[WeaponMod], m_weapon.transform.position, Quaternion.identity);
+        m_PlyShot.tag = "PlayerShot";
     }
 
     public void CollectPowerUp(int powerUp)
