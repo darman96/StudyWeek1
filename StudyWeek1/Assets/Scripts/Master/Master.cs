@@ -4,22 +4,29 @@ using System.Collections.Generic;
 
 public class Master : MonoBehaviour {
 
-    public List<GameObject> Waves = new List<GameObject>();
+    public float FlightLevel = 10;
 
-    private List<GameObject> enemiesInScene = new List<GameObject>();
-    private GameObject Player;
+    public List<GameObject> Waves = new List<GameObject>();
+    public GameObject PlayerPrefab;
+
+    private List<GameObject> EnemiesInScene = new List<GameObject>();
+    private List<GameObject> Players;
 
     private Wave currentWave;
     private int currentWaveIndex = 0;
 
     //Playercount
-    public int m_playerCount = 1;
+    private int playerCount = 0;
+    public int m_playerCount = 0;
 
 	// Use this for initialization
 	void Start () {
-        GameObject.DontDestroyOnLoad(this.gameObject.transform);
+        GameObject.DontDestroyOnLoad(this.gameObject);
 
-        Player = GameObject.FindWithTag("Player");
+        for(int i = 1; i <= playerCount; i++)
+        {
+            Players.Add(PlayerPrefab);
+        }
 
         //currentWave = Waves[currentWaveIndex].GetComponent<Wave>();
 	}
