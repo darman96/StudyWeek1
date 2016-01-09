@@ -61,12 +61,14 @@ public class EnemyAIM : MonoBehaviour {
         m_ply2Dist = Vector3.SqrMagnitude(m_dist2);
     }
     void ShootAtPlayer(GameObject _Player) {
-        //m_ammoSpawn.transform.rotation = Quaternion.LookRotation(_Player.transform.position, Vector3.up);
-        m_shot = (GameObject)Instantiate(m_ammonition, m_ammoSpawn.transform.position, //new Quaternion(0,180,0,1)
-                                                                  //Quaternion.RotateTowards(m_ammoSpawn.transform.rotation, (new Quaternion(_Player.transform.rotation.x + 180, _Player.transform.rotation.y + Random.Range(-m_spread, m_spread), _Player.transform.rotation.z, _Player.transform.rotation.w)), 500f)
-                                                                  Quaternion.LookRotation(((_Player.transform.position - transform.position)/* + new Vector3(Random.Range(-m_spread, m_spread), 0, 0)*/), Vector3.zero)
-                                                                  //new Quaternion(0, Random.Range(-m_spread, m_spread) * m_spreadMultiplyer, 0, 1)
-            );
+        //Initialize the shot
+        m_shot = (GameObject)Instantiate(m_ammonition, m_ammoSpawn.transform.position,
+            //Rotate to the Player
+            Quaternion.LookRotation(((_Player.transform.position - transform.position) 
+            //Initialize the spread
+            + new Vector3(Random.Range(-m_spread, m_spread), 0, Random.Range(-m_spread, m_spread) + 20))
+            //Say where is upwards
+            , Vector3.up));
         //Retag the initialized shot and set to the "EnemyShot" Layer
         m_shot.tag = "Enemy";
         m_shot.layer = 11;
