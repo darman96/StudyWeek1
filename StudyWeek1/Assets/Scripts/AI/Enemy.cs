@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     {
         PlaneCharacter plch = GameObject.Find("PlaneCharacter").GetComponent<PlaneCharacter> ();
 
-        plch.calcPTS(enemyPoints);
         Destroy(gameObject);
 
     }
