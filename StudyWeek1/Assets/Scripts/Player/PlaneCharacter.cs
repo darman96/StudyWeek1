@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class PlaneCharacter : MonoBehaviour {
 
     //Time between Shots & so
@@ -13,38 +14,32 @@ public class PlaneCharacter : MonoBehaviour {
     public int ShieldDuration = 5;
 
     public int MaxHP = 5;
+    public int CurrentHP = 5;
     public int Lives = 3;
 
     //Player Number
     public int m_PlayerNumber = 1;
 
-    [HideInInspector] public int points = 0;
-
     // Contains all projectiles for the Weapon Stages
     public List<GameObject> Projectiles = new List<GameObject>();
     public List<GameObject> WeaponMounts = new List<GameObject>();
 
+
+
     private int WeaponMod;
-    private int CurrentHP;
+
     private float CurrentShieldDuration  = 0;
 
+    // Audio Variable
     private AudioSource audio;
-    private GameObject obj_hpBar;
-    private UnityEngine.UI.Text txtPoints;
-    //To modiy the initialized shots
-    private GameObject m_PlyShot;
-    public GameObject m_weapon;
 
-	// Use this for initialization
+    // Array for Health Sprites
+
 	void Start ()
     {
         CurrentHP = MaxHP;
 
-        audio = GetComponent<AudioSource>();
-
-        obj_hpBar = GameObject.Find("HPF");
-        //txtPoints = GameObject.Find("DPoints").GetComponent<UnityEngine.UI.Text>();
-
+        audio = GetComponent<AudioSource>();    
 	}
 	
 	// Update is called once per frame
@@ -60,7 +55,7 @@ public class PlaneCharacter : MonoBehaviour {
 
         InputHandling();
 
-	}
+    }
 
     private void InputHandling()
     {
@@ -84,10 +79,10 @@ public class PlaneCharacter : MonoBehaviour {
         m_NextShot = true;
     }
 
-    private void Attack(){
-        // Initialized projectile of the current weapon stage and retag the initialized shot
-        m_PlyShot = (GameObject)Instantiate(Projectiles[WeaponMod], m_weapon.transform.position, Quaternion.identity);
-        m_PlyShot.tag = "PlayerShot";
+    private void Attack()
+    {
+        // Instantiate projectile of the current weapon stage
+        Instantiate(Projectiles[WeaponMod],transform.position , Quaternion.identity);
     }
 
     public void CollectPowerUp(int powerUp)
@@ -126,13 +121,5 @@ public class PlaneCharacter : MonoBehaviour {
             Application.LoadLevel(Application.loadedLevelName);
         }
 
-        obj_hpBar.transform.localScale = new Vector3(Mathf.Clamp(hp, 0f, 1f), transform.localScale.y, transform.localScale.z);
     }
-
-    public void calcPTS (int value)
-    {
-        points += value;
-        txtPoints.text = points.ToString();
-    }
-
 }
