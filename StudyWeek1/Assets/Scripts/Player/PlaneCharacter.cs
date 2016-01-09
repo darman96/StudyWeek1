@@ -6,8 +6,10 @@ using System.Collections.Generic;
 public class PlaneCharacter : MonoBehaviour {
 
     //Time between Shots & so
-    public float m_TimeToNextShot = 0.1f;
-    private bool m_NextShot = true;
+    public float TimeToNextShot = 0.1f;
+    private bool NextShot = true;
+    public GameObject weapon;
+    private GameObject shot;
 
     public float FlightLevel = 10f;
 
@@ -18,13 +20,11 @@ public class PlaneCharacter : MonoBehaviour {
     public int Lives = 3;
 
     //Player Number
-    public int m_PlayerNumber = 1;
+    public int PlayerNumber = 1;
 
     // Contains all projectiles for the Weapon Stages
     public List<GameObject> Projectiles = new List<GameObject>();
     public List<GameObject> WeaponMounts = new List<GameObject>();
-
-
 
     private int WeaponMod;
 
@@ -60,29 +60,30 @@ public class PlaneCharacter : MonoBehaviour {
     private void InputHandling()
     {
         // Shooting
-        if(Input.GetKey(KeyCode.Space) && m_NextShot == true && m_PlayerNumber == 1) {
+        if(Input.GetKey(KeyCode.Space) && NextShot == true && PlayerNumber == 1) {
             Attack();
-            m_NextShot = false;
+            NextShot = false;
             //Hold the bullets back
-            StartCoroutine(StopShotting(m_TimeToNextShot));
+            StartCoroutine(StopShotting(TimeToNextShot));
         }
-        if(Input.GetKey(KeyCode.Keypad0) && m_NextShot == true && m_PlayerNumber == 2) {
+        if(Input.GetKey(KeyCode.Keypad0) && NextShot == true && PlayerNumber == 2) {
             Attack();
-            m_NextShot = false;
+            NextShot = false;
             //Hold the bullets back
-            StartCoroutine(StopShotting(m_TimeToNextShot));
+            StartCoroutine(StopShotting(TimeToNextShot));
         }
     }
 
     IEnumerator StopShotting(float _TimeToWait) {
         yield return new WaitForSeconds(_TimeToWait);
-        m_NextShot = true;
+        NextShot = true;
     }
 
     private void Attack()
     {
         // Instantiate projectile of the current weapon stage
-        Instantiate(Projectiles[WeaponMod],transform.position , Quaternion.identity);
+        shot = (GameObject)Instantiate(Projectiles[WeaponMod],weapon.transform.position , Quaternion.identity);
+        shot.tag = "PlayerShot";
     }
 
     public void CollectPowerUp(int powerUp)
