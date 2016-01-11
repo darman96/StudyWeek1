@@ -84,6 +84,8 @@ public class PlaneCharacter : MonoBehaviour {
         // Instantiate projectile of the current weapon stage
         shot = (GameObject)Instantiate(Projectiles[WeaponMod],weapon.transform.position , Quaternion.identity);
         shot.tag = "PlayerShot";
+
+        audio.Play();
     }
 
     public void CollectPowerUp(int powerUp)
