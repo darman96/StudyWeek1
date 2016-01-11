@@ -66,7 +66,7 @@ public class EnemyAIM : MonoBehaviour {
             //Rotate to the Player
             Quaternion.LookRotation(((_Player.transform.position - transform.position) 
             //Initialize the spread
-            + new Vector3(Random.Range(-spread, spread), 0, Random.Range(-spread, spread) + 20))
+            + new Vector3(Random.Range(-spread, spread), 0, Random.Range(-spread, spread) + ammoSpawn.transform.position.z))
             //Say where is upwards
             , Vector3.up));
         //Retag the initialized shot and set to the "EnemyShot" Layer
