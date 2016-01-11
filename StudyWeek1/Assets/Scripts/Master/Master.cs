@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Master : MonoBehaviour {
 
@@ -9,7 +10,11 @@ public class Master : MonoBehaviour {
     public List<GameObject> Waves = new List<GameObject>();
     public GameObject PlayerPrefab;
 
-    private List<GameObject> EnemiesInScene = new List<GameObject>();
+
+    private List<GameObject> FightersInScene = new List<GameObject>();
+    private List<GameObject> BombersInScene = new List<GameObject>();
+    private List<GameObject> ZeppelinsInScene = new List<GameObject>();
+
     private List<GameObject> Players;
 
     private Wave currentWave;
@@ -43,4 +48,35 @@ public class Master : MonoBehaviour {
         currentWave.Spawn();
     */
 	}
+
+    public void AddFighter(GameObject fighter)
+    {
+        FightersInScene.Add(fighter);
+    }
+
+    public void AddBomber(GameObject bomber)
+    {
+        BombersInScene.Add(bomber);
+    }
+
+    public void AddZeppelin(GameObject zeppelin)
+    {
+        ZeppelinsInScene.Add(zeppelin);
+    }
+
+    public int CurrentFighterCount()
+    {
+        return FightersInScene.Count;
+    }
+
+    public int CurrentBomberCount()
+    {
+        return BombersInScene.Count;
+    }
+
+    public int CurrentZeppelinCount()
+    {
+        return ZeppelinsInScene.Count;
+    }
+
 }
