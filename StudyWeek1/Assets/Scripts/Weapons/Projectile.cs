@@ -11,6 +11,8 @@ public class Projectile : MonoBehaviour {
         rig = GetComponent<Rigidbody>();
     }
 
+    public GameObject ParticleEffektHit;
+
     void Update()
     {
         //The Simple way
@@ -27,5 +29,10 @@ public class Projectile : MonoBehaviour {
         if(col.transform.tag == "Enemy" && transform.tag != "Enemy") {
             Destroy(gameObject);
         }
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
     }
 }
