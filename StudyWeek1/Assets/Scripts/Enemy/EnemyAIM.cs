@@ -13,15 +13,16 @@ public class EnemyAIM : MonoBehaviour {
     //Spread
     public float spread = 10.0f;
     public float spreadMultiplyer = 50f;
-
     //Distances
     private Vector3 dist1;
     private Vector3 dist2;
-
     //Variablen
     private float ply1Dist = 0f;
     private float ply2Dist = 0f;
     private int playerCount = 1;  //Move to MasterScript
+    //"Reloadtime"
+    public float nextShotIn = 0.2f;
+    private bool nextShot = true;
 
     //To modiy the initialized shots
     GameObject shot;
@@ -37,20 +38,36 @@ public class EnemyAIM : MonoBehaviour {
 	void Update () {
         switch(playerCount) {
             case 1:
-                ShootAtPlayer(player1);
+                if(nextShot == true) {
+                    ShootAtPlayer(player1);
+                    nextShot = false;
+                    StartCoroutine(Reaim(nextShotIn));
+                }
                 break;
             case 2:
-                NearestPlayer();
-                if(ply1Dist < ply2Dist) {
-                    ShootAtPlayer(player1);
-                    print("pl1");
-                } else {
-                    ShootAtPlayer(player2);
-                    print("pl2");
+                if(nextShot == true) {
+                    NearestPlayer();
+                    if(ply1Dist < ply2Dist) {
+                        ShootAtPlayer(player1);
+                        print("pl1");
+                        nextShot = false;
+                        StartCoroutine(Reaim(nextShotIn));
+                    } else {
+                        ShootAtPlayer(player2);
+                        print("pl2");
+                        nextShot = false;
+                        StartCoroutine(Reaim(nextShotIn));
+                    }
                 }
                 break;
         }
 	}
+
+    //"Reload"
+    IEnumerator Reaim(float _TimeToWait) {
+        yield return new WaitForSeconds(_TimeToWait);
+        nextShot = true;
+    }
 
     void NearestPlayer() {
         //Distance to Player1
@@ -64,9 +81,9 @@ public class EnemyAIM : MonoBehaviour {
         //Initialize the shot
         shot = (GameObject)Instantiate(ammonition, ammoSpawn.transform.position,
             //Rotate to the Player
-            Quaternion.LookRotation(((_Player.transform.position - transform.position) 
+            Quaternion.LookRotation(((_Player.transform.position - transform.position)
             //Initialize the spread
-            + new Vector3(Random.Range(-spread, spread), 0, Random.Range(-spread, spread) + ammoSpawn.transform.position.z))
+            + new Vector3(Random.Range(-spread, spread), 0, Random.Range(-spread, spread) + (transform.position.z - ammoSpawn.transform.position.z)))
             //Say where is upwards
             , Vector3.up));
         //Retag the initialized shot and set to the "EnemyShot" Layer
