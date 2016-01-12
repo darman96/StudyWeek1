@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyAIM : MonoBehaviour {
+public class TurretRotation : MonoBehaviour {
 
     //player
     private GameObject player1;
@@ -49,11 +49,13 @@ public class EnemyAIM : MonoBehaviour {
                     NearestPlayer();
                     if(ply1Dist < ply2Dist) {
                         ShootAtPlayer(player1);
+                        //RotateAtPlayer(player1);
                         print("pl1");
                         nextShot = false;
                         StartCoroutine(Reaim(nextShotIn));
                     } else {
                         ShootAtPlayer(player2);
+                        //RotateAtPlayer(player2);
                         print("pl2");
                         nextShot = false;
                         StartCoroutine(Reaim(nextShotIn));
@@ -61,7 +63,7 @@ public class EnemyAIM : MonoBehaviour {
                 }
                 break;
         }
-	}
+    }
 
     //"Reload"
     IEnumerator Reaim(float _TimeToWait) {
@@ -77,6 +79,7 @@ public class EnemyAIM : MonoBehaviour {
         dist2 = transform.position - player2.transform.position;
         ply2Dist = Vector3.SqrMagnitude(dist2);
     }
+
     void ShootAtPlayer(GameObject _Player) {
         //Initialize the shot
         shot = (GameObject)Instantiate(ammonition, ammoSpawn.transform.position,
@@ -90,4 +93,8 @@ public class EnemyAIM : MonoBehaviour {
         shot.tag = "Enemy";
         shot.layer = 11;
     }
+
+    /*void RotateAtPlayer(GameObject _Player) {
+        transform.rotation = Quaternion.LookRotation(new Vector3(_Player.transform.position.x, 0, _Player.transform.position.z), Vector3.up);
+    }*/
 }

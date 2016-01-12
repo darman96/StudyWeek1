@@ -7,6 +7,7 @@ public class ButtonCommands : MonoBehaviour {
     public GameObject m_OptionsScreen;
     public GameObject m_BindingsScreen;
     public GameObject m_ExtrasScreen;
+    public GameObject m_CreditsScreen;
 
     void Update() {
         //Escape-Button is used
@@ -17,10 +18,13 @@ public class ButtonCommands : MonoBehaviour {
             ToMainScreenFromOptions();
         }
         if(Input.GetKeyDown(KeyCode.Escape) && (m_BindingsScreen.activeInHierarchy)) {
-            ToOptionsScreen();
+            ToOptionsScreenFromBinding();
         }
         if(Input.GetKeyDown(KeyCode.Escape) && (m_ExtrasScreen.activeInHierarchy)) {
             ToMainScreenFromExtras();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape) && (m_CreditsScreen.activeInHierarchy)) {
+            ToExtrasScreenFromCredits();
         }
     }
 
@@ -30,6 +34,7 @@ public class ButtonCommands : MonoBehaviour {
         Application.Quit();
     }
 
+    //Login <-> Options
     public void ToMainScreenFromOptions() {
         m_OptionsScreen.active = false;
         m_MainScreen.active = true;
@@ -40,11 +45,29 @@ public class ButtonCommands : MonoBehaviour {
         m_MainScreen.active = true;
     }
 
-    public void ToOptionsScreen() {
+    //Options <-> Bindings
+    public void ToOptionsScreenFromBinding() {
         m_BindingsScreen.active = false;
         m_OptionsScreen.active = true;
     }
 
+    public void ToBindingsScreen() {
+        m_OptionsScreen.active = false;
+        m_BindingsScreen.active = true;
+    }
+
+    //Extras <-> Credits
+    public void ToCreditsScreenFromExtras() {
+        m_ExtrasScreen.active = false;
+        m_CreditsScreen.active = true;
+    }
+
+    public void ToExtrasScreenFromCredits() {
+        m_CreditsScreen.active = false;
+        m_ExtrasScreen.active = true;
+    }
+
+    //Load Level
     public void LoadP1() {
         GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount = 1;
         print(GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount);

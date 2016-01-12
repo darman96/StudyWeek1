@@ -13,7 +13,7 @@ public class HUD : MonoBehaviour
 
     void Start()
     {
-        ply = GameObject.Find("Lockheed").GetComponent<PlaneCharacter>();
+        ply = GameObject.Find("Lockheed-Player1").GetComponent<PlaneCharacter>();
     }
 
     void Update()

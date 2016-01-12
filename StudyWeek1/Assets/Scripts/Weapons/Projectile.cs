@@ -19,20 +19,24 @@ public class Projectile : MonoBehaviour {
         //transform.Translate(Vector3.forward * Time.deltaTime * m_Speed, Space.Self);
 
         //Better Collision detection
-        rig.velocity = transform.forward * m_Speed;
+        //For Players
+        if(gameObject.tag == "PlayerShot") {
+            rig.velocity = transform.forward * m_Speed;
+        }
+        //For Enemys
+        if(gameObject.layer == 11) {
+            rig.velocity = transform.forward * (m_Speed / 2);
+        }
     }
 
     void OnCollisionEnter(Collision col) {
         if((col.transform.tag == "Player1" || col.transform.tag == "Player2") && (transform.tag != "PlayerShot")) {
+            //Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
         if(col.transform.tag == "Enemy" && transform.tag != "Enemy") {
+            //Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
-    }
-
-    void OnCollisionEnter(Collision col)
-    {
-        Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
     }
 }
