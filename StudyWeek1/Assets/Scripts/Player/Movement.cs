@@ -15,17 +15,9 @@ public class Movement : MonoBehaviour
     private float zVelocityPly1 = 0;
     private float xVelocityPly2 = 0;
     private float zVelocityPly2 = 0;
-<<<<<<< HEAD
 
-    void Start()
-    {
-        //PlayerCount = GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount;
-=======
-    
     void Start() {
-        PlayerCount = GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount;
-        //m_PlayerCount = GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount;
->>>>>>> 848814d312e98f33f978da56fd6d7b049bf5b273
+        
     }
 
     // Update is called once per frame
