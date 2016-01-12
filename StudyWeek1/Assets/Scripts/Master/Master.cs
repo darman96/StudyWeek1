@@ -33,7 +33,7 @@ public class Master : MonoBehaviour {
             Players.Add(PlayerPrefab);
         }
 
-        GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnFighters(5);
+        //GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnFighters(5);
 
         //currentWave = Waves[currentWaveIndex].GetComponent<Wave>();
 	}

@@ -29,6 +29,6 @@ public class Enemy : MonoBehaviour
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        GameObject.Find("Master-Indestructable").GetComponent<Master>().RemoveFighter(gameObject);
+        //GameObject.Find("Master-Indestructable").GetComponent<Master>().RemoveFighter(gameObject);
     }
 }
