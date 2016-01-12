@@ -28,7 +28,8 @@ public class Projectile : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision col) {
-        if((col.transform.tag == "Player1" || col.transform.tag == "Player2") && (transform.tag != "PlayerShot")) {
+
+        if ((col.transform.tag == "Player1" || col.transform.tag == "Player2") && (transform.tag != "PlayerShot")) {
             Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
             GameObject.Find(col.transform.name).GetComponent<PlaneCharacter>().calcHP(Damage);
             Destroy(gameObject);
