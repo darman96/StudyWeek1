@@ -15,6 +15,7 @@ public class PlaneCharacter : MonoBehaviour {
 
     public int ShieldDuration = 5;
 
+    //Health & lives
     public int MaxHP = 5;
     public int CurrentHP = 5;
     public int Lives = 3;
@@ -123,6 +124,5 @@ public class PlaneCharacter : MonoBehaviour {
         {
             Application.LoadLevel(Application.loadedLevelName);
         }
-
     }
 }

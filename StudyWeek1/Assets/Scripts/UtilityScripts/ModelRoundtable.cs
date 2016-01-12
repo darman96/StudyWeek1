@@ -3,15 +3,10 @@ using System.Collections;
 
 public class ModelRoundtable : MonoBehaviour {
 
-    public float rotationSpeed = 10.0f;
+    public float rotationSpeed = 0.5f;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
-        transform.RotateAroundLocal(Vector3.up, rotationSpeed);
+        transform.RotateAroundLocal(Vector3.up, rotationSpeed * Time.deltaTime);
 	}
 }

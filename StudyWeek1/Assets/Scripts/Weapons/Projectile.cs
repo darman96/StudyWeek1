@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour {
 
     public float m_Speed = 100f;
     public bool Explosive = false;
+    public int dmg = 1;
     Rigidbody rig;
 
     void Start() {
@@ -32,10 +33,12 @@ public class Projectile : MonoBehaviour {
     void OnCollisionEnter(Collision col) {
         if((col.transform.tag == "Player1" || col.transform.tag == "Player2") && (transform.tag != "PlayerShot")) {
             //Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
+            GameObject.Find(col.transform.name).GetComponent<PlaneCharacter>().calcHP(dmg);
             Destroy(gameObject);
         }
         if(col.transform.tag == "Enemy" && transform.tag != "Enemy") {
             //Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
+            GameObject.Find(col.transform.name).GetComponent<Enemy>().calcHP(dmg);
             Destroy(gameObject);
         }
     }

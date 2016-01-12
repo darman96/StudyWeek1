@@ -3,21 +3,13 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
+    public int enemyPoints = 50;
     public int maxEnemyHealth = 2;
-    public int enemyPoints = 100;
-         
     private int curEnemyHealth = 2;
-
-	void Start ()
-    {
-	
-	}
-	
 
     public void calcHP(int iDmg)
     {
         curEnemyHealth -= iDmg;
-        float eHP = (float)curEnemyHealth / (float)maxEnemyHealth;
 
         if (curEnemyHealth < 1)
         {
@@ -26,7 +18,7 @@ public class Enemy : MonoBehaviour
     }
    void EnemyDeath()
     {
-        PlaneCharacter plch = GameObject.Find("PlaneCharacter").GetComponent<PlaneCharacter> ();
+        //PlaneCharacter plch = GameObject.Find("PlaneCharacter").GetComponent<PlaneCharacter>();
 
         Destroy(gameObject);
 

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ButtonCommands : MonoBehaviour {
 
+    public GameObject m_TitleScreen;
     public GameObject m_MainScreen;
     public GameObject m_OptionsScreen;
     public GameObject m_BindingsScreen;
@@ -10,6 +11,12 @@ public class ButtonCommands : MonoBehaviour {
     public GameObject m_CreditsScreen;
 
     void Update() {
+        //Title Screen
+        if(m_TitleScreen.activeInHierarchy && Input.anyKeyDown) {
+            m_TitleScreen.active = false;
+            m_MainScreen.active = true;
+        }
+
         //Escape-Button is used
         if(Input.GetKeyDown(KeyCode.Escape) && (m_MainScreen.activeInHierarchy)) {
             Exit();
