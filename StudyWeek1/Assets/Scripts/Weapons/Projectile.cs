@@ -35,7 +35,7 @@ public class Projectile : MonoBehaviour {
             Destroy(gameObject);
         }
         if(col.transform.tag == "Enemy") {
-            col.gameObject.GetComponent<Enemy>().ApplyDamage(Damage);
+            //col.gameObject.GetComponent<Enemy>().ApplyDamage(Damage);
             Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
             GameObject.Find(col.transform.name).GetComponent<Enemy>().ApplyDamage(Damage);
             Destroy(gameObject);
