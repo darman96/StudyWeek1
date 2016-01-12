@@ -17,13 +17,13 @@ public class SimpleEnemyAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        MasterComp = GameObject.Find("Master").GetComponent<Master>();
+        MasterComp = GameObject.Find("Master-Indestructable").GetComponent<Master>();
         FlightLevel = MasterComp.FlightLevel;
 
         Vector3 tempPos = transform.position;
         tempPos.y = FlightLevel;
         transform.position = tempPos;
-	}
+    }
 
     // Update is called once per frame
     void Update() {
@@ -46,5 +46,4 @@ public class SimpleEnemyAI : MonoBehaviour {
     {
         NextWaypoint = waypoint;
     }
-
 }

@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 
     private int CurrentHP;
 
+
+
 	void Start ()
     {
         CurrentHP = MaxHP;
@@ -28,8 +30,7 @@ public class Enemy : MonoBehaviour
     private void EnemyDeath()
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
-        GameObject.Find("Master").GetComponent<Master>().RemoveFighter(gameObject);
-
         Destroy(gameObject);
+        //GameObject.Find("Master-Indestructable").GetComponent<Master>().RemoveFighter(gameObject);
     }
 }
