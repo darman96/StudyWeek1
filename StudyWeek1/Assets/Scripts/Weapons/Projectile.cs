@@ -3,9 +3,13 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 
-    public float m_Speed = 100f;
+    public float Speed = 100f;
+
+    public int Damage;
+
     public bool Explosive = false;
-    Rigidbody rig;
+
+    private Rigidbody rig;
 
     void Start() {
         rig = GetComponent<Rigidbody>();
@@ -19,20 +23,21 @@ public class Projectile : MonoBehaviour {
         //transform.Translate(Vector3.forward * Time.deltaTime * m_Speed, Space.Self);
 
         //Better Collision detection
-        rig.velocity = transform.forward * m_Speed;
+        rig.velocity = transform.forward * Speed;
     }
 
     void OnCollisionEnter(Collision col) {
         if((col.transform.tag == "Player1" || col.transform.tag == "Player2") && (transform.tag != "PlayerShot")) {
             Destroy(gameObject);
         }
-        if(col.transform.tag == "Enemy" && transform.tag != "Enemy") {
+        if(col.transform.tag == "Enemy") {
+            col.gameObject.GetComponent<Enemy>().ApplyDamage(Damage);
             Destroy(gameObject);
         }
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
-    }
+    //void OnCollisionEnter(Collision col)
+    //{
+    //    Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
+    //}
 }

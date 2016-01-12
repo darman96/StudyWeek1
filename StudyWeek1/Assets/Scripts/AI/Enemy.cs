@@ -3,32 +3,33 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxEnemyHealth = 2;
+    public int MaxHP = 2;
     public int enemyPoints = 100;
-         
-    private int curEnemyHealth = 2;
+
+    public GameObject explosion;
+
+    private int CurrentHP;
 
 	void Start ()
     {
-	
+        CurrentHP = MaxHP;
 	}
-	
 
-    public void calcHP(int iDmg)
+    public void ApplyDamage(int damage)
     {
-        curEnemyHealth -= iDmg;
-        float eHP = (float)curEnemyHealth / (float)maxEnemyHealth;
+        CurrentHP -= damage;
 
-        if (curEnemyHealth < 1)
+        if(CurrentHP <= 0)
         {
             EnemyDeath();
         }
     }
-   void EnemyDeath()
+
+    private void EnemyDeath()
     {
-        PlaneCharacter plch = GameObject.Find("PlaneCharacter").GetComponent<PlaneCharacter> ();
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        GameObject.Find("Master").GetComponent<Master>().RemoveFighter(gameObject);
 
         Destroy(gameObject);
-
     }
 }
