@@ -19,6 +19,7 @@ public class PlaneCharacter : MonoBehaviour {
     public int MaxHP = 5;
     public int CurrentHP = 5;
     public int Lives = 3;
+    private bool dead = false;
 
     //Player Number
     public int PlayerNumber = 1;
@@ -31,6 +32,9 @@ public class PlaneCharacter : MonoBehaviour {
 
     private float CurrentShieldDuration  = 0;
 
+    public GameObject otherPlayer;
+    private int playerCount = 1;
+
     // Audio Variable
     private AudioSource audio;
 
@@ -40,8 +44,10 @@ public class PlaneCharacter : MonoBehaviour {
     {
         CurrentHP = MaxHP;
 
-        audio = GetComponent<AudioSource>();    
-	}
+        audio = GetComponent<AudioSource>();
+
+        playerCount = GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -118,11 +124,23 @@ public class PlaneCharacter : MonoBehaviour {
         if (CurrentHP <= 0)
         {
             Lives -= 1;
+            CurrentHP = MaxHP;
         }
 
         if(Lives <= 0)
         {
-            Application.LoadLevel(Application.loadedLevelName);
+            dead = true;
+            if(playerCount == 1) {
+                dead = false;
+                Application.LoadLevel(Application.loadedLevelName);             
+            }
+            if(playerCount == 2 && otherPlayer.GetComponent<PlaneCharacter>().dead == false) {
+                gameObject.active = false;
+            }
+            if(playerCount == 2 && otherPlayer.GetComponent<PlaneCharacter>().dead == true) {
+                dead = false;
+                Application.LoadLevel(Application.loadedLevelName);
+            }
         }
     }
 }
