@@ -18,9 +18,4 @@ public class EnemyProjectile : MonoBehaviour {
         transform.Translate(Vector3.forward * Time.deltaTime * m_Speed, Space.Self);
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
-    }
-
 }

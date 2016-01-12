@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject explosion;
 
-    private int CurrentHP;
+    public int CurrentHP;
 
 
 
@@ -31,6 +31,6 @@ public class Enemy : MonoBehaviour
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        //GameObject.Find("Master-Indestructable").GetComponent<Master>().RemoveFighter(gameObject);
+        GameObject.Find("Master").GetComponent<Master>().RemoveFighter(gameObject);
     }
 }

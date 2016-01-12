@@ -6,28 +6,31 @@ public class CharacterController : MonoBehaviour
 {
 
     public float Speed = 10f;
+    public float TiltSpeed = 0;
     public float RateOfFire = 0.2f;      // time in seconds per shot
 
     public int MaxHP = 10;
 
-    public List<GameObject> Projectiles = new List<GameObject>();
-    public List<GameObject> WeaponMounts = new List<GameObject>();
+    public GameObject GatlingProjectile;
+    public GameObject GatlingMount;
+
+    public GameObject MissileProjectile;
+    public List<GameObject> MissileMounts = new List<GameObject>();
 
     private float FlightLevel;
     private float XMovement = 0;
     private float ZMovement = 0;
     private float LastFrameTime = 0;
 
-    private int CurrentProjectileIndex = 0;
     private int CurrentHP = 0;
 
-    private Master MasterComponent;
+    private Master master;
 
     // Use this for initialization
     void Start()
     {
-        MasterComponent = GameObject.Find("Master").GetComponent<Master>();
-        FlightLevel = MasterComponent.FlightLevel;
+        master = GameObject.Find("Master").GetComponent<Master>();
+        FlightLevel = master.FlightLevel;
 
         LastFrameTime = Time.time;
         CurrentHP = MaxHP;
@@ -47,9 +50,9 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    void InputHandling()
+    private void InputHandling()
     {
-        if (Input.GetButton("Fire1") && (Time.time - LastFrameTime >= RateOfFire))
+        if (Input.GetKey(KeyCode.Space) && (Time.time - LastFrameTime >= RateOfFire))
         {
             Shoot();
             LastFrameTime = Time.time;
@@ -59,17 +62,58 @@ public class CharacterController : MonoBehaviour
         ZMovement = Input.GetAxis("Vertical") * Speed * Time.deltaTime;
     }
 
-    void Movement()
+    private void Movement()
     {
         transform.Translate(new Vector3(XMovement, 0, ZMovement));
+
+        Rotate(XMovement, ZMovement);
+    }
+
+    private void Rotate(float xVeloc, float zVeloc)
+    {
+        //Left drill
+        if (xVeloc < 0 && (transform.rotation.z < 20 || transform.rotation.z >= 340))
+        {
+            transform.Rotate(Vector3.forward, TiltSpeed * Time.deltaTime);
+        }
+        if (transform.rotation.eulerAngles.z > 20 && transform.rotation.eulerAngles.z < 180)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 20);
+        }
+
+        //Right drill
+        if (xVeloc > 0 && (transform.rotation.z > 340 || transform.rotation.z <= 20))
+        {
+            transform.Rotate(Vector3.back, TiltSpeed * Time.deltaTime);
+        }
+        if (transform.rotation.eulerAngles.z < 340 && transform.rotation.eulerAngles.z > 180)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 340);
+        }
+
+        //Redrill in the middle when no "Left/Right" Button is pressed
+        if (xVeloc == 0 && transform.rotation.z != 0)
+        {
+            if (transform.rotation.eulerAngles.z > 0 && transform.rotation.eulerAngles.z < 180)
+            {
+                transform.Rotate(Vector3.back, TiltSpeed * Time.deltaTime);
+            }
+            if (transform.rotation.eulerAngles.z < 360 && transform.rotation.eulerAngles.z > 180)
+            {
+                transform.Rotate(Vector3.forward, TiltSpeed * Time.deltaTime);
+            }
+        }
     }
 
     // Instantiate a projectile for each WeaponMount
-    void Shoot()
+    private void Shoot()
     {
-        foreach (var weaponMount in WeaponMounts)
-        {
-            Instantiate(Projectiles[CurrentProjectileIndex], weaponMount.transform.position, transform.rotation);
-        }
+
+        // Gatling Gun
+        Instantiate(GatlingProjectile, GatlingMount.transform.position, transform.rotation);
+
+        // Missiles
+        // TODO Missiles
+
     }
 }

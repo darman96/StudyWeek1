@@ -28,14 +28,7 @@ public class Master : MonoBehaviour {
 	void Start () {
         GameObject.DontDestroyOnLoad(this.gameObject);
 
-        for(int i = 1; i <= playerCount; i++)
-        {
-            Players.Add(PlayerPrefab);
-        }
-
-        //GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnFighters(5);
-
-        //currentWave = Waves[currentWaveIndex].GetComponent<Wave>();
+        GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnFighters(5);
 	}
 	
 	// Update is called once per frame

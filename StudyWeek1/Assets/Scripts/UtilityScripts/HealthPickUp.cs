@@ -16,8 +16,8 @@ public class HealthPickUp : MonoBehaviour
 	// Update is called once per frame
 	void OnTriggerEnter ()
     {
-        PlaneCharacter ply = GameObject.Find("Lockheed-Player1").GetComponent<PlaneCharacter>();
-        ply.calcHP(healthValue);
+        //PlaneCharacter ply = GameObject.Find("Lockheed-Player1").GetComponent<PlaneCharacter>();
+        //ply.calcHP(healthValue);
        // Destroy(gameObject, destroyPickupAfterXSeconds);
 	}
 }

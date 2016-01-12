@@ -19,8 +19,8 @@ public class PowerUps : MonoBehaviour
     {
 	    if (col.gameObject.tag == "Player")
         {
-            col.GetComponent<PlaneCharacter>().CollectPowerUp(buffType);
-            Destroy(gameObject, destroyPickupAfterXSeconds);
+            //col.GetComponent<PlaneCharacter>().CollectPowerUp(buffType);
+            //Destroy(gameObject, destroyPickupAfterXSeconds);
         }
 	}
 }

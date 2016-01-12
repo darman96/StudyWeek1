@@ -27,23 +27,15 @@ public class Projectile : MonoBehaviour {
         rig.velocity = transform.forward * Speed;
     }
 
-    void OnCollisionEnter(Collision col) {
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log("Bullet Collision");
 
-        if ((col.transform.tag == "Player1" || col.transform.tag == "Player2") && (transform.tag != "PlayerShot")) {
-            Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
-            GameObject.Find(col.transform.name).GetComponent<PlaneCharacter>().calcHP(Damage);
-            Destroy(gameObject);
+        if(col.transform.tag == "Enemy")
+        {
+            col.gameObject.GetComponent<Enemy>().ApplyDamage(Damage);
         }
-        if(col.transform.tag == "Enemy") {
-            //col.gameObject.GetComponent<Enemy>().ApplyDamage(Damage);
-            Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
-            GameObject.Find(col.transform.name).GetComponent<Enemy>().ApplyDamage(Damage);
-            Destroy(gameObject);
-        }
+
     }
 
-    //void OnCollisionEnter(Collision col)
-    //{
-    //    Instantiate(ParticleEffektHit, transform.position, Quaternion.identity);
-    //}
 }
