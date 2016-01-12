@@ -47,12 +47,13 @@ public class EnemyAIM : MonoBehaviour {
             case 2:
                 if(nextShot == true) {
                     NearestPlayer();
-                    if(ply1Dist < ply2Dist) {
+                    if(ply1Dist < ply2Dist || player2.activeInHierarchy == false) {
                         ShootAtPlayer(player1);
                         print("pl1");
                         nextShot = false;
                         StartCoroutine(Reaim(nextShotIn));
-                    } else {
+                    }
+                    if(ply1Dist > ply2Dist || player1.activeInHierarchy == false) {
                         ShootAtPlayer(player2);
                         print("pl2");
                         nextShot = false;

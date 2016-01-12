@@ -33,6 +33,8 @@ public class Master : MonoBehaviour {
             Players.Add(PlayerPrefab);
         }
 
+        GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnFighters(5);
+
         //currentWave = Waves[currentWaveIndex].GetComponent<Wave>();
 	}
 	
@@ -62,6 +64,21 @@ public class Master : MonoBehaviour {
     public void AddZeppelin(GameObject zeppelin)
     {
         ZeppelinsInScene.Add(zeppelin);
+    }
+
+    public void RemoveFighter(GameObject fighter)
+    {
+        FightersInScene.Remove(fighter);
+    }
+
+    public void RemoveBomber(GameObject bomber)
+    {
+        BombersInScene.Remove(bomber);
+    }
+    
+    public void RemoveZeppelin(GameObject zeppelin)
+    {
+        ZeppelinsInScene.Remove(zeppelin);
     }
 
     public int CurrentFighterCount()

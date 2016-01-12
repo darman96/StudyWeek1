@@ -41,7 +41,9 @@ public class WaypointManager : MonoBehaviour {
             
             if(FighterCount > 0 && master.CurrentFighterCount() < FighterSpawnPoints.Count)
             {
-                master.AddFighter((GameObject)Instantiate(FighterPrefab, FighterSpawnPoints[CurrentFighterSpawn].transform.position, Quaternion.identity));
+                GameObject fighter = (GameObject)Instantiate(FighterPrefab, FighterSpawnPoints[CurrentFighterSpawn].transform.position, Quaternion.identity);
+                fighter.GetComponent<SimpleEnemyAI>().SetWaypoint(FighterSpawnPoints[CurrentFighterSpawn]);
+                master.AddFighter(fighter);
 
                 FighterCount--;
                 LastSpawnTime = Time.time;
