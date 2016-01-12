@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 
     private int CurrentHP;
 
+
+
 	void Start ()
     {
         CurrentHP = MaxHP;
