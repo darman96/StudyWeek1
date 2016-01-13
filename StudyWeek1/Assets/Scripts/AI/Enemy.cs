@@ -27,10 +27,5 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void EnemyDeath()
-    {
-        Instantiate(explosion, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-        GameObject.Find("Master").GetComponent<Master>().RemoveFighter(gameObject);
-    }
+    protected virtual void EnemyDeath() { }
 }

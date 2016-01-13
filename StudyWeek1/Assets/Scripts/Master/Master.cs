@@ -28,8 +28,10 @@ public class Master : MonoBehaviour {
 	void Start () {
         GameObject.DontDestroyOnLoad(this.gameObject);
 
-        GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnFighters(5);
-	}
+        GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnFighters(10);
+        GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnBombers(5);
+        GameObject.Find("WaypointManager").GetComponent<WaypointManager>().SpawnZeppelin(1);
+    }
 	
 	// Update is called once per frame
 	void Update () {

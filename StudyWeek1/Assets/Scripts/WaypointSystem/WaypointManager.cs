@@ -47,17 +47,27 @@ public class WaypointManager : MonoBehaviour {
 
                 FighterCount--;
                 LastSpawnTime = Time.time;
+                return;
             }
-            if(BomberCount > 0 && master.CurrentBomberCount() < BomberSpawnPoints.Count)
+            if(FighterCount <= 0 && BomberCount > 0 && master.CurrentBomberCount() < BomberSpawnPoints.Count)
             {
-                master.AddBomber((GameObject)Instantiate(BomberPrefab, BomberSpawnPoints[CurrentBomberSpawn].transform.position, Quaternion.identity));
+                GameObject bomber = (GameObject)Instantiate(BomberPrefab, BomberSpawnPoints[CurrentBomberSpawn].transform.position, Quaternion.identity);
+                bomber.GetComponent<SimpleEnemyAI>().SetWaypoint(BomberSpawnPoints[CurrentBomberSpawn]);
+                master.AddBomber(bomber);
 
                 BomberCount--;
                 LastSpawnTime = Time.time;
+                return;
             }
-            if(ZeppelinCount > 0 && master.CurrentZeppelinCount() < ZeppelinSpawnPoints.Count)
+            if(FighterCount <= 0 && BomberCount <= 0 && ZeppelinCount > 0 && master.CurrentZeppelinCount() < ZeppelinSpawnPoints.Count)
             {
-                master.AddZeppelin((GameObject)Instantiate(ZeppelinPrefab, ZeppelinSpawnPoints[CurrentZeppelinSpawn].transform.position, Quaternion.identity));
+                GameObject zeppelin = (GameObject)Instantiate(ZeppelinPrefab, ZeppelinSpawnPoints[CurrentZeppelinSpawn].transform.position, Quaternion.identity);
+                zeppelin.GetComponent<SimpleEnemyAI>().SetWaypoint(ZeppelinSpawnPoints[CurrentZeppelinSpawn]);
+                master.AddZeppelin(zeppelin);
+
+                ZeppelinCount--;
+                LastSpawnTime = Time.time;
+                return;
             }
 
         }
@@ -66,9 +76,17 @@ public class WaypointManager : MonoBehaviour {
 
     public void SpawnFighters(int count)
     {
-
         FighterCount = count;
+    }
 
+    public void SpawnBombers(int count)
+    {
+        BomberCount = count;
+    }
+
+    public void SpawnZeppelin(int count)
+    {
+        ZeppelinCount = count;
     }
 
 
