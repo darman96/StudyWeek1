@@ -41,32 +41,47 @@ public class WaypointManager : MonoBehaviour {
             
             if(FighterCount > 0 && master.CurrentFighterCount() < FighterSpawnPoints.Count)
             {
-                GameObject fighter = (GameObject)Instantiate(FighterPrefab, FighterSpawnPoints[CurrentFighterSpawn].transform.position, Quaternion.identity);
+                GameObject fighter = (GameObject)Instantiate(FighterPrefab, FighterSpawnPoints[CurrentFighterSpawn].transform.position, FighterPrefab.transform.rotation);
                 fighter.GetComponent<SimpleEnemyAI>().SetWaypoint(FighterSpawnPoints[CurrentFighterSpawn]);
                 master.AddFighter(fighter);
 
                 FighterCount--;
                 LastSpawnTime = Time.time;
+                CurrentFighterSpawn++;
+                if(CurrentFighterSpawn >= FighterSpawnPoints.Count)
+                {
+                    CurrentFighterSpawn = 0;
+                }
                 return;
             }
             if(FighterCount <= 0 && BomberCount > 0 && master.CurrentBomberCount() < BomberSpawnPoints.Count)
             {
-                GameObject bomber = (GameObject)Instantiate(BomberPrefab, BomberSpawnPoints[CurrentBomberSpawn].transform.position, Quaternion.identity);
+                GameObject bomber = (GameObject)Instantiate(BomberPrefab, BomberSpawnPoints[CurrentBomberSpawn].transform.position, BomberPrefab.transform.rotation);
                 bomber.GetComponent<SimpleEnemyAI>().SetWaypoint(BomberSpawnPoints[CurrentBomberSpawn]);
                 master.AddBomber(bomber);
 
                 BomberCount--;
                 LastSpawnTime = Time.time;
+                CurrentBomberSpawn++;
+                if (CurrentBomberSpawn >= BomberSpawnPoints.Count)
+                {
+                    CurrentBomberSpawn = 0;
+                }
                 return;
             }
             if(FighterCount <= 0 && BomberCount <= 0 && ZeppelinCount > 0 && master.CurrentZeppelinCount() < ZeppelinSpawnPoints.Count)
             {
-                GameObject zeppelin = (GameObject)Instantiate(ZeppelinPrefab, ZeppelinSpawnPoints[CurrentZeppelinSpawn].transform.position, Quaternion.identity);
+                GameObject zeppelin = (GameObject)Instantiate(ZeppelinPrefab, ZeppelinSpawnPoints[CurrentZeppelinSpawn].transform.position, ZeppelinPrefab.transform.rotation);
                 zeppelin.GetComponent<SimpleEnemyAI>().SetWaypoint(ZeppelinSpawnPoints[CurrentZeppelinSpawn]);
                 master.AddZeppelin(zeppelin);
 
                 ZeppelinCount--;
                 LastSpawnTime = Time.time;
+                CurrentZeppelinSpawn++;
+                if (CurrentZeppelinSpawn >= ZeppelinSpawnPoints.Count)
+                {
+                    CurrentZeppelinSpawn = 0;
+                }
                 return;
             }
 

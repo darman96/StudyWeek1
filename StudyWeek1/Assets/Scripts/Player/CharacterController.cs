@@ -13,6 +13,7 @@ public class CharacterController : MonoBehaviour
 
     public GameObject GatlingProjectile;
     public GameObject GatlingMount;
+    public GameObject explosion;
 
     public GameObject MissileProjectile;
     public List<GameObject> MissileMounts = new List<GameObject>();
@@ -22,7 +23,7 @@ public class CharacterController : MonoBehaviour
     private float ZMovement = 0;
     private float LastFrameTime = 0;
 
-    private int CurrentHP = 0;
+    public int CurrentHP = 0;
 
     private Master master;
 
@@ -103,6 +104,26 @@ public class CharacterController : MonoBehaviour
                 transform.Rotate(Vector3.forward, TiltSpeed * Time.deltaTime);
             }
         }
+    }
+
+    public void ApplyDamage(int damage)
+    {
+        CurrentHP -= damage;
+        if(CurrentHP <= 0)
+        {
+            PlayerDeath();
+        }
+    }
+
+    private void PlayerDeath()
+    {
+        Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        Application.LoadLevel(1);
     }
 
     // Instantiate a projectile for each WeaponMount

@@ -6,6 +6,8 @@ public class EnemyProjectile : MonoBehaviour {
     public float m_Speed = 100f;
     public bool Explosive = false;
 
+    public int Damage = 1;
+
     public GameObject ParticleEffektHit;
 
     void Start()
@@ -16,6 +18,18 @@ public class EnemyProjectile : MonoBehaviour {
     void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * m_Speed, Space.Self);
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log("Bullet Collision");
+
+        if (col.transform.tag == "Player")
+        {
+            col.gameObject.GetComponent<CharacterController>().ApplyDamage(Damage);
+            Destroy(gameObject);
+        }
+
     }
 
 }

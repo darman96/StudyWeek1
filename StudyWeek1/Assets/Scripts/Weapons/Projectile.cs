@@ -34,6 +34,7 @@ public class Projectile : MonoBehaviour {
         if(col.transform.tag == "Enemy")
         {
             col.gameObject.GetComponent<Enemy>().ApplyDamage(Damage);
+            Destroy(gameObject);
         }
 
     }

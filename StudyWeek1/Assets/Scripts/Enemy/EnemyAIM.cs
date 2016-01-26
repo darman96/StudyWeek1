@@ -29,9 +29,9 @@ public class EnemyAIM : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        player1 = GameObject.FindGameObjectWithTag("Player1");
+        player1 = GameObject.FindGameObjectWithTag("Player");
         player2 = GameObject.FindGameObjectWithTag("Player2");
-        playerCount = GameObject.Find("Master-Indestructable").GetComponent<Master>().m_playerCount;
+        playerCount = 1;
     }
 	
 	// Update is called once per frame

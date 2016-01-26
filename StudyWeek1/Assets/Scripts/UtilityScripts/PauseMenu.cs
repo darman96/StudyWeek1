@@ -43,10 +43,14 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void RestartLevel()
+    {
+        Application.LoadLevel(1);
+    }
+
     public void Quit()
     {
 #if UNITY_EDITOR
-
         EditorApplication.isPlaying = false;
 #else
         Application.Quit();
